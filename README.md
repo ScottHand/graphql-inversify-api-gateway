@@ -1,11 +1,14 @@
 ###Prerequisites
+
 - Docker Desktop to run MySQL database locally in a container
 
 ###Installation
 
+
     $ npm install
     
 ###Run project locally
+
 
 The following command will initiate two tmux sessions: 1) the database in a docker container, and 2) the api.
 
