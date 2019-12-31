@@ -1,0 +1,41 @@
+{
+  "name": "graphql-inversify-api-gateway",
+  "version": "1.0.0",
+  "description": "Graphql API Gateway example using Inversify, an inversion of control container for JavaScript & Node.js apps powered by TypeScript, and TypeORM",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "compile": "rmdir-cli dist && npm run build",
+    "extract-local-env-config": "node -e \"console.log(Object.entries(require('./env-config.json').LOCAL).map(v => '--' + v[0] + ' ' + v[1]).join(' '))\"",
+    "localhost": "npm run compile && ncp node_modules dist/node_modules && npm run --silent extract-local-env-config | xargs -t sls offline --location dist --stage DEV || 0",
+    "db": "cd db && docker-compose rm -f && docker-compose up",
+    "offline": "stmux -w always -e ERROR -m beep,system -- [ \"npm run db\" .. \"npm run localhost\" ]",
+    "lint": "tslint -p tsconfig.json -c tslint.json",
+    "test": "jest --maxWorkers=1",
+    "test:coverage": "jest --collectCoverage"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^24.0.25",
+    "@types/node": "^13.1.2",
+    "jest": "^24.9.0",
+    "ncp": "^2.0.0",
+    "rmdir-cli": "^2.0.6",
+    "serverless": "^1.60.4",
+    "serverless-offline": "^5.12.1",
+    "serverless-plugin-typescript": "^1.1.9",
+    "stmux": "^1.8.0",
+    "ts-jest": "^24.2.0",
+    "ts-node": "^8.5.4",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4"
+  },
+  "dependencies": {
+    "apollo-server-lambda": "^2.9.15",
+    "aws-lambda": "^1.0.4",
+    "inversify": "^5.0.1",
+    "inversify-binding-decorators": "^4.0.0",
+    "mysql": "^2.17.1",
+    "typeorm": "^0.2.22"
+  }
+}

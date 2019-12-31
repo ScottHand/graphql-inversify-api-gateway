@@ -1,0 +1,75 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended"
+  ],
+  "jsRules": {
+    "no-unused-expression": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "no-unused-variable": false,
+    "noImplicitThis": true,
+    "noImplicitReturns": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true
+  },
+  "rules": {
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "member-access": [
+      false
+    ],
+    "ordered-imports": [
+      false
+    ],
+    "max-line-length": [
+      true,
+      150
+    ],
+    "member-ordering": [
+      false
+    ],
+    "interface-name": [
+      false
+    ],
+    "arrow-parens": false,
+    "object-literal-sort-keys": false,
+    "trailing-comma": [
+      true,
+      {
+        "singleline": "never",
+        "multiline": {
+          "objects": "ignore",
+          "arrays": "ignore",
+          "functions": "never",
+          "typeLiterals": "ignore"
+        }
+      }
+    ],
+    "rulesDirectory": [],
+    "no-shadowed-variable": [
+      false,
+      {
+        "class": true,
+        "enum": true,
+        "function": false,
+        "interface": false,
+        "namespace": true,
+        "typeAlias": false,
+        "typeParameter": false,
+        "underscore": false,
+        "temporalDeadZone": false
+      }
+    ],
+    "no-empty": false,
+    "no-console": [true, "warning"],
+    "variable-name": [
+      true,
+      "allow-leading-underscore"
+    ],
+    "whitespace": [true, "check-module", "check-branch", "check-operator", "check-typecast"]
+  }
+}

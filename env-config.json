@@ -1,0 +1,27 @@
+{
+  "LOCAL": {
+    "region": "us-east-1",
+    "secretManagerKey": "localhost/graphql-inversify-demo",
+    "databaseName": "movie_db"
+  },
+  "DEV": {
+    "region": "us-east-1",
+    "secretManagerKey": "localhost/graphql-inversify-demo",
+    "databaseName": "movie_db"
+  },
+  "STAGE": {
+    "region": "us-east-1",
+    "secretManagerKey": "localhost/graphql-inversify-demo",
+    "databaseName": "movie_db"
+  },
+  "PROD": {
+    "region": "us-east-1",
+    "secretManagerKey": "localhost/graphql-inversify-demo",
+    "databaseName": "movie_db"
+  },
+  "LAB": {
+    "region": "us-east-1",
+    "secretManagerKey": "localhost/graphql-inversify-demo",
+    "databaseName": "movie_db"
+  }
+}
