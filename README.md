@@ -42,3 +42,43 @@ To terminate the application:
          movie(id: Int): Movie
          movies: [Movie]
      }
+
+### Get Movies
+
+Graphql Query
+
+     query {
+       movies {
+         id
+         title
+         description
+         releaseDate
+       }
+     }
+     
+ Output Example:
+ 
+      {
+        "data": {
+          "movies": [
+            {
+              "id": 1,
+              "title": "Star Wars: Episode IX - The Rise of Skywalker",
+              "description": "After Palpatine mysteriously returns, the Resistance faces the First Order once more in the final chapter of the Skywalker saga.",
+              "releaseDate": "2019-12-20T05:00:00.000Z"
+            },
+            {
+              "id": 2,
+              "title": "Frozen II",
+              "description": "Anna, Elsa, Kristoff, Olaf and Sven leave Arendelle to travel to an ancient, autumn-bound forest of an enchanted land. They set out to find the origin of Elsa's powers in order to save their kingdom.",
+              "releaseDate": "2019-11-22T05:00:00.000Z"
+            },
+            {
+              "id": 3,
+              "title": "Forrest Gump",
+              "description": "The presidencies of Kennedy and Johnson, the events of Vietnam, Watergate, and other history unfold through the perspective of an Alabama man with an IQ of 75.",
+              "releaseDate": "1994-07-06T04:00:00.000Z"
+            }
+          ]
+        }
+      }
