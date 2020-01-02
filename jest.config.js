@@ -5,7 +5,7 @@ module.exports = {
   ],
   preset: "ts-jest",
   roots: [
-    "<rootDir>/tests",
+    "<rootDir>/__tests__",
   ],
   testEnvironment: "node",
   verbose: true,
