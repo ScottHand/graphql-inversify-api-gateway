@@ -10,7 +10,7 @@
     "db": "cd db && docker-compose rm -f && docker-compose up",
     "offline": "stmux -w always -e ERROR -m beep,system -- [ \"npm run db\" .. \"npm run localhost\" ]",
     "lint": "tslint -p tsconfig.json -c tslint.json",
-    "test": "jest --maxWorkers=1",
+    "tests": "jest --maxWorkers=1",
     "test:coverage": "jest --collectCoverage"
   },
   "author": "",

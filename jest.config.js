@@ -1,14 +1,11 @@
 module.exports = {
   clearMocks: true,
-  moduleNameMapper: {
-    "incontrol-shared-library": "<rootDir>/test/unit/globalModuleMocks/incontrol-shared-library-mock.ts",
-  },
-  preset: "ts-jest",
   modulePaths: [
     "<rootDir>",
   ],
+  preset: "ts-jest",
   roots: [
-    "<rootDir>/test",
+    "<rootDir>/tests",
   ],
   testEnvironment: "node",
   verbose: true,
