@@ -6,7 +6,10 @@ jspm_packages
 .serverless
 
 #IDE's
-/.idea
+.idea/
 
 # Custom
 package-lock.json
+
+# Built files
+dist/
