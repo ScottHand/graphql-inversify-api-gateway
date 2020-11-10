@@ -1,4 +1,4 @@
-import { SecretsService } from '../../services/secretsService';
+import { SecretsService } from '../../services';
 import { RdsProvider } from '../providers/rdsProvider';
 import { Logger } from '../logger';
 import { createGraphQlServerFactory } from './graphqlServerFactory';

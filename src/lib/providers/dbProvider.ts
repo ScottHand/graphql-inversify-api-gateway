@@ -1,6 +1,6 @@
 import { Logger } from '../logger';
 import { RdsProvider } from './rdsProvider';
-import { SecretsService } from '../../services/secretsService';
+import { SecretsService } from '../../services';
 import { Entity } from 'typeorm';
 
 export class DbProvider {

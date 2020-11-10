@@ -44,11 +44,7 @@ export async function createGraphQlServer() {
       entities: ALL_ENTITIES
     } );
 
-    // container.get<MovieService>(TYPE.MovieService)
     container.bind(TYPE.Connection).toConstantValue(connection);
-    // container.bind(TYPE.MovieService).toConstructor<MovieService>(MovieService);
-    // container.resolve(TYPE.MovieService).to(MovieService)
-    // const movieService = new MovieService(logger, connection);
 
     return createGraphQlServerFactory(
       logger,
