@@ -22,6 +22,8 @@ export const createGraphQlServerFactory = (
   const server = new ApolloServer({
     schema,
     context: contextFunc,
+    playground: true,
+    introspection: true,
     formatError: error => {
       logger.error('Factory', createGraphQlServerFactory.name, error);
       // @ts-ignore

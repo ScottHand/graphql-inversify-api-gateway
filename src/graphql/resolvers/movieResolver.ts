@@ -1,8 +1,10 @@
-import { MovieService } from '../../services/movieService';
+import { MovieService } from '../../services';
 
-export const createMovieResolver = (movieService: MovieService) => ({
-  Query: {
-    movie: async (_, {id}) => movieService.getById(id),
-    movies: () => movieService.getAll()
-  }
-});
+export const createMovieResolver = (movieService: MovieService) => {
+  return ( {
+    Query: {
+      movie: async ( _, { id } ) => movieService.getById( id ),
+      movies: () => movieService.getAll()
+    }
+  } );
+};

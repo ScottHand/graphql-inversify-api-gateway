@@ -17,15 +17,24 @@ export class SecretsManagerProvider {
     this.logger.log(SecretsManagerProvider.name, this.getSecrets.name, `id: ${id}`);
     return new Promise( (resolve, reject) => {
       const params = { SecretId: id };
-      this.secretsManager.getSecretValue(params, (err, data) => {
-        if (err) {
-          const error = new InfrastructureError(`Get secrets failed. Params: ${JSON.stringify(params)}`, err);
-          this.logger.error(SecretsManagerProvider.name, this.getSecrets.name, error);
-          reject(error);
-        } else {
-          resolve(JSON.parse(data.SecretString));
-        }
-      });
+      if (process.env.STAGE === 'LOCAL') {
+        resolve(
+          {
+          username: process.env.LOCAL_DB_USERNAME,
+          password: process.env.LOCAL_DB_PASSWORD,
+          host: 'localhost'
+        });
+      } else {
+        this.secretsManager.getSecretValue(params, (err, data) => {
+          if (err) {
+            const error = new InfrastructureError(`Get secrets failed. Params: ${JSON.stringify(params)}`, err);
+            this.logger.error(SecretsManagerProvider.name, this.getSecrets.name, error);
+            reject(error);
+          } else {
+            resolve(JSON.parse(data.SecretString));
+          }
+        });
+      }
     });
   }
 }

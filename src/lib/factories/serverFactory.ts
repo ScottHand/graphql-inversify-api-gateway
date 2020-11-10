@@ -1,6 +1,6 @@
-import { ALL_ENTITITES } from '../../entities/entities';
+import { ALL_ENTITIES } from '../../entities/entities';
 import { container } from '../../ioc';
-import { TYPE } from '../../config/types';
+import { TYPE, config } from '../../config';
 import { Logger } from '../logger';
 import { RdsGraphQlServerFactory } from './rdsGraphQLServerFactory';
 
@@ -13,9 +13,9 @@ const logger: Logger = container.get<Logger>(TYPE.Logger);
 export async function createRdsGraphQlServer(graphQlTypes, createGraphQlResolver) {
   try {
     return await rdsGraphQlServerFactory.create(
-      process.env.DATABASE_NAME,
-      ALL_ENTITITES,
-      process.env.SECRETS_MANAGER_KEY,
+      config.databaseName,
+      ALL_ENTITIES,
+      config.rdsSecretsKey,
       createGraphQlResolver,
       graphQlTypes
     );

@@ -8,6 +8,5 @@ events:
       path: /movie
       method: post
 
-memorySize: 1000
+memorySize: 128
 timeout: 30
-reservedConcurrency: ${opt:reservedConcurrency}

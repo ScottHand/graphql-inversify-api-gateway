@@ -1,10 +1,8 @@
 import { ContainerModule, interfaces } from 'inversify';
-import { TYPE } from '../config/types';
-import { config } from '../config/config';
-import { rdsConfig } from '../config/rds';
+import { TYPE, config, rdsConfig } from '../config';
 import { createLogger } from '../lib/factories/loggerFactory';
 import { createSecretsManagerProvider } from '../lib/factories/secretsManagerProviderFactory';
-import { SecretsService } from '../services/secretsService';
+import { SecretsService } from '../services';
 import { RdsGraphQlServerFactory } from '../lib/factories/rdsGraphQLServerFactory';
 import { createRdsProvider } from '../lib/factories/rdsProviderFactory';
 

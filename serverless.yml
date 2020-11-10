@@ -4,10 +4,20 @@ custom:
   stage: ${opt:stage, self:provider.stage}
   region: ${opt:region}
   accountId: ${opt:accountId}
+  localstack:
+    debug: true
+    stages: [LOCAL]
+    host: http://localhost
+    autostart: true
+    edgePort: 4566
+    lambda:
+      mountCode: false
+    docker:
+      sudo: false
 
 plugins:
   - serverless-offline
-
+  - serverless-localstack
 
 provider:
   name: aws
@@ -16,13 +26,11 @@ provider:
     SECRETS_MANAGER_KEY: ${opt:secretManagerKey}
     DATABASE_NAME: ${opt:databaseName}
     REGION: "us-east-1"
-    NODE_ENV: "production"
-  iamRoleStatements: ${file(sls/role/iamRoleStatement.yml)}
+    STAGE: ${opt:stage, self:provider.stage}
+    LOCAL_DB_USERNAME: ${opt:localDbUserName}
+    LOCAL_DB_PASSWORD: ${opt:localDbPassword}
   stackTags:
     "Name": "Graphql-Inversify-API-Gateway-Demo"
-  tracing:
-    apiGateway: true
-    lambda: true
 
 functions:
   movieService: ${file(sls/lambda/movieService.yml)}
@@ -55,19 +63,3 @@ package:
     - src/**
     - '*.js'
     - node_modules/**
-
-#    Define function environment variables here
-#    environment:
-#      variable2: value2
-
-# you can add CloudFormation resource templates here
-#resources:
-#  Resources:
-#    NewResource:
-#      Type: AWS::S3::Bucket
-#      Properties:
-#        BucketName: my-new-bucket
-#  Outputs:
-#     NewOutput:
-#       Description: "Description for the output"
-#       Value: "Some output value"
