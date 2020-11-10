@@ -1,0 +1,9 @@
+{
+  "LOCAL": {
+    "region": "us-east-1",
+    "secretManagerKey": "localhost/graphql-inversify-demo",
+    "databaseName": "movie_db",
+    "localDbUserName": "root",
+    "localDbPassword": "banana"
+  }
+}

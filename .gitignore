@@ -1,0 +1,21 @@
+# package directories
+/node_modules
+jspm_packages
+
+# Serverless directories
+/.serverless
+
+#IDE's
+/.idea
+
+# Custom
+package-lock.json
+
+# Built files
+/dist
+
+# Ignores compiled TypeScript files
+**/src/**/*.map
+**/src/**/*.js
+**/spec/**/*.map
+**/spec/**/*.js

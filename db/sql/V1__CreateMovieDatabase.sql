@@ -1,0 +1,1 @@
+create schema if not exists movie_db collate utf8mb4_general_ci;

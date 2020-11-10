@@ -1,0 +1,65 @@
+service: graphql-inversify-api-gateway
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  region: ${opt:region}
+  accountId: ${opt:accountId}
+  localstack:
+    debug: true
+    stages: [LOCAL]
+    host: http://localhost
+    autostart: true
+    edgePort: 4566
+    lambda:
+      mountCode: false
+    docker:
+      sudo: false
+
+plugins:
+  - serverless-offline
+  - serverless-localstack
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  environment:
+    SECRETS_MANAGER_KEY: ${opt:secretManagerKey}
+    DATABASE_NAME: ${opt:databaseName}
+    REGION: "us-east-1"
+    STAGE: ${opt:stage, self:provider.stage}
+    LOCAL_DB_USERNAME: ${opt:localDbUserName}
+    LOCAL_DB_PASSWORD: ${opt:localDbPassword}
+  stackTags:
+    "Name": "Graphql-Inversify-API-Gateway-Demo"
+
+functions:
+  movieService: ${file(sls/lambda/movieService.yml)}
+
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
+      GatewayResponseDefault5XX:
+        Type: 'AWS::ApiGateway::GatewayResponse'
+        Properties:
+          ResponseParameters:
+            gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+            gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+          ResponseType: DEFAULT_5XX
+          RestApiId:
+            Ref: 'ApiGatewayRestApi'
+
+package:
+  exclude:
+    - ./**
+  include:
+    - src/**
+    - '*.js'
+    - node_modules/**
