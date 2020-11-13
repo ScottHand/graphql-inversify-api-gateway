@@ -6,7 +6,7 @@ This is a code sample of an API Gateway with Lambda integration that is written 
 - [Flyway](https://flywaydb.org/)
 
 The primary purpose of this sample is to demonstrate a repeatable OO design approach in terms of a recommended code structure, 
-design patterns that could be used, and a sample unit testing strategy the demonstrates how to mock TypeORM.
+design patterns that could be used, and a sample unit testing strategy using [Jest](https://jestjs.io/) the demonstrates how to mock TypeORM.
 
 ### Use Case
 The use case this sample is intending to demonstrate is when a customer, for whatever reason, has limited technology choices available to them.  
@@ -108,7 +108,6 @@ To run the Jest unit tests, run the following command from terminal:
 | /src/services/secretsService.ts                       | Service that manages retrieval of the Secrets Manager key from the SecretsManagerProvider
 | /movie-handler.ts                                     | The entry point of the application as the Lambda handler that creates an instance of Apollo-Server and creates a Lambda handler |
 | /serverless.yml                                       | Serverless.com framework definition file that sets up the AWS services used | 
-
      
 ### Movie Service Schema
 
