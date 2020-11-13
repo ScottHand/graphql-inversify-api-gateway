@@ -33,7 +33,19 @@ provider:
     "Name": "Graphql-Inversify-API-Gateway-Demo"
 
 functions:
-  movieService: ${file(sls/lambda/movieService.yml)}
+  movieService:
+    handler: src/movie-handler.handler
+    events:
+      - http:
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+          path: /movie
+          method: post
+
+    memorySize: 128
+    timeout: 30
 
 resources:
   Resources:

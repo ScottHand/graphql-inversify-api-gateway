@@ -8,6 +8,11 @@ This is a code sample of an API Gateway with Lambda integration that is written 
 The primary purpose of this sample is to demonstrate a repeatable OO design approach in terms of a recommended code structure, 
 design patterns that could be used, and a sample unit testing strategy the demonstrates how to mock TypeORM.
 
+### Use Case
+The use case this sample is intending to demonstrate is when a customer, for whatever reason, has limited technology choices available to them.  
+
+For example, instead of using AWS AppSync the customer must make another choice like Apollo Server.  Likewise, instead of AWS SAM or AWS Amplify, the customer's approved severless framework is serverless.com. 
+
 ### Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) to run MySQL database locally in a container
@@ -37,6 +42,8 @@ To install all the local dependencies required for this application, run the fol
     
 ### Run project (locally)
 This project is designed to **only run locally** so that the focus remains on the OO design and implementations aforementioned and has not been instrumented to deploy to an AWS Account.  
+
+The project is able to run locally because of the use of the `serverless-offline` and `serverless-localstack` plugins.
 
 Use the following procedures to run the application locally:
 
@@ -71,6 +78,37 @@ To terminate the application while in tmux mode:
  
      Ctrl+a ?
      
+### Run Unit Tests
+
+To run the Jest unit tests, run the following command from terminal:
+
+    $ npm run tests     
+
+### File Structure
+
+| File/Directory                                         | Description |  
+|------:|:-------------|  
+| /__tests__                                            | Directory containing the unit tests using the [Jest](https://jestjs.io/) framework   |  
+| /db                                                   | Directory containing the MySQL database Docker container definition and DDL scripts to create the schema and load sample data       |  
+| /src/config                                           | Directory containing the application configuration related files         |  
+| /src/entities                                         | Directory containing the Movie TypeORM entity that maps the Movie model to the MySQL database |  
+| /src/graphql                                          | Directory containing the graphql types (Movie), queries (i.e., movie and movies), and resolvers  |  
+| /src/ioc                                              | Directory containing the Inversify IoC container definition and bindings |  
+| /src/lib/decorators                                   | Directory containing the Exception decorator that is used to decorate the services and handles common exceptions |  
+| /src/lib/errors                                       | Directory containing the types of errors handled by the Exception decorator  |  
+| /src/factories/graphqlServerFactory.ts                | Factory pattern used by the Lambda handler (movie-handler.ts) to create the Graphql Apollo Server instance |
+| /src/factories/lambdaHandlerFactory.ts                | Factory pattern used to create the Lambda handler |
+| /src/factories/loggerFactory.ts                       | Factory pattern used to create an instance of the Logger class |
+| /src/factories/rdsProviderFactory.ts                  | Factory pattern used to create an instance of the RdsProvider which manages the connection to the MySQL database |
+| /src/factories/secretsManagerProviderFactory.ts       | Factory pattern used to create an instance of the SecretsManagerProvider which manages the retrieval of the secrets key |
+| /src/initializers/awsInitialier.ts                    | AWS configuration initializer |
+| /src/providers                                        | Directory containing the RDS and SecretsManager providers which are responsible for managing the connection to the database and Secrets Manager key retrieval, respectively |
+| /src/logger.ts                                        | Logger class |
+| /src/services/movieService.ts                         | Business logic layer that retrieves the Movie data from the database.  Repositories were not used because TypeORM has the repository concept built in |
+| /src/services/secretsService.ts                       | Service that manages retrieval of the Secrets Manager key from the SecretsManagerProvider
+| /movie-handler.ts                                     | The entry point of the application as the Lambda handler that creates an instance of Apollo-Server and creates a Lambda handler |
+| /serverless.yml                                       | Serverless.com framework definition file that sets up the AWS services used | 
+
      
 ### Movie Service Schema
 
