@@ -45,11 +45,6 @@ export class RdsProvider {
         throw error;
       }
     }
-
-    // this.dbConnection = await createConnection(connectionOptions);
-    //
-    // this.logger.log(RdsProvider.name, createConnection.name, `Created new connection ${this.dbConnection.name}`);
-
     return this.connection;
   }
 

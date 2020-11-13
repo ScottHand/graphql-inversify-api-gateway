@@ -6,14 +6,13 @@ import { InternalServerError } from '../lib/errors/internalServerError';
 import { Logger } from '../lib/logger';
 import { Movie } from '../entities/movie';
 import { BaseService } from './baseService';
-import { Connection } from 'typeorm/index';
+import { getConnection, createQueryBuilder, getRepository } from 'typeorm';
 
 @provide(TYPE.MovieService)
 export class MovieService extends BaseService {
   constructor(
-    @inject(TYPE.Logger) private logger: Logger,
-    @inject(TYPE.Connection) protected connection: Connection) {
-    super(connection);
+    @inject(TYPE.Logger) private logger: Logger) {
+    super();
   }
 
   /**
@@ -23,7 +22,12 @@ export class MovieService extends BaseService {
   async getAll(): Promise<Movie[]> {
     try {
       await this.checkConnection();
-      const result = await this.connection.getRepository(Movie).find();
+      // const result = await this.connection.getRepository(Movie).find();
+      const result = getConnection()
+        .getRepository(Movie)
+        .createQueryBuilder('movie')
+        .orderBy( { title: 'ASC'})
+        .getMany();
       this.logger.log(MovieService.name, this.getAll.name, `result: ${JSON.stringify(result)}`);
       return result;
     } catch (error) {
@@ -46,7 +50,12 @@ export class MovieService extends BaseService {
       await this.checkConnection();
       this.logger.log(MovieService.name, this.getById.name, `id: ${id}`);
 
-      const result = await this.connection.getRepository(Movie).findOne( {id});
+      const result = await getConnection()
+        .getRepository(Movie)
+        .createQueryBuilder('movie')
+        .select()
+        .where('id = :id', { id })
+        .getOne();
       this.logger.log(MovieService.name, this.getById.name, `result`, result);
       return result;
     } catch (error) {
