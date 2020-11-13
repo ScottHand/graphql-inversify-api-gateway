@@ -29,7 +29,6 @@ For example, instead of using AWS AppSync the customer must make another choice 
         $ brew unlink node
         $ brew install node@10.13.0
         $ brew link node@10.13.0
- 
  - [Typescript](https://www.typescriptlang.org/)
  
         $ npm install -g typescript
