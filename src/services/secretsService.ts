@@ -1,12 +1,13 @@
 import { Logger } from '../lib/logger';
 import { SecretsManagerProvider } from '../lib/providers/secretsManagerProvider';
+import { inject } from 'inversify';
+import { TYPE } from '../config';
 
 export class SecretsService {
   private secrets = {};
 
-  constructor(private readonly logger: Logger,
-              private readonly secretManagerProvider: SecretsManagerProvider) {
-  }
+  constructor(@inject(TYPE.Logger) private readonly logger: Logger,
+              @inject(TYPE.SecretsManagerProvider) private readonly secretManagerProvider: SecretsManagerProvider) { }
 
   /**
    * Get secret manager values by key id
