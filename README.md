@@ -1,17 +1,19 @@
-This is a code sample of an API Gateway with Lambda integration that is written in Node.js using Typescript and implements the following: 
-- [Graphql Apollo Server](https://www.apollographql.com/docs/apollo-server/)
-- [TypeORM](https://typeorm.io/#/)
-- [Inversify IoC container](http://inversify.io/)
-- [Serverless framework](https://www.serverless.com/)
-- [Flyway](https://flywaydb.org/)
+### Overview
 
-The primary purpose of this sample is to demonstrate a repeatable OO design approach in terms of a recommended code structure, 
-design patterns that could be used, and a sample unit testing strategy using [Jest](https://jestjs.io/) the demonstrates how to mock TypeORM.
+This repo includes a sample API Gateway with Lambda integration intended to demonstrate a customer common use case we have observed in ProServe whereby the customer has a limited subset of AWS services and open-source frameworks/libraries approved within their organization.  This often results in teams having to make trade-offs between speed and desired architecture.
 
-### Use Case
-The use case this sample is intending to demonstrate is when a customer, for whatever reason, has limited technology choices available to them.  
+In many cases, we see customers choose speed given it can take months to get new AWS services and open-source frameworks through a security review, architecture review board, etc. and ultimately approved.
 
-For example, instead of using AWS AppSync the customer must make another choice like Apollo Server.  Likewise, instead of AWS SAM or AWS Amplify, the customer's approved severless framework is serverless.com. 
+This API is an example of that where the AWS ProServe led development team and the customer chose speed by making the following choices that were already approved by the customer's organization:
+
+- [Graphql Apollo Server](https://www.apollographql.com/docs/apollo-server/) an open-source GraphQL server used instead of AppSync
+- [Serverless framework](https://www.serverless.com/) instead of the AWS Serverless Application Model (SAM)
+- [TypeORM](https://typeorm.io/#/) - JavaScript ORM to connect to and query the MySQL relational database and map results to the object model.
+- [Inversify IoC container](http://inversify.io/) - IoC framework used to demonstrate IoC and DI principles
+- [Flyway](https://flywaydb.org/) - An open source database migration tool used to setup the MySQL database used for this example
+- [Jest](https://jestjs.io/) - unit testing framework
+
+In addition to demonstrating the use of these AWS services and open-source frameworks/libraries, this sample is also intended to provide prescriptive guidance with a recommended code structure, OO design patterns, and unit testing with mocking.
 
 ### Prerequisites
 
@@ -85,28 +87,28 @@ To run the Jest unit tests, run the following command from terminal:
 
 ### File Structure
 
-| File/Directory                                         | Description |  
-|------:|:-------------|  
-| /__tests__                                            | Directory containing the unit tests using the [Jest](https://jestjs.io/) framework   |  
-| /db                                                   | Directory containing the MySQL database Docker container definition and DDL scripts to create the schema and load sample data       |  
-| /src/config                                           | Directory containing the application configuration related files         |  
-| /src/entities                                         | Directory containing the Movie TypeORM entity that maps the Movie model to the MySQL database |  
-| /src/graphql                                          | Directory containing the graphql types (Movie), queries (i.e., movie and movies), and resolvers  |  
-| /src/ioc                                              | Directory containing the Inversify IoC container definition and bindings |  
-| /src/lib/decorators                                   | Directory containing the Exception decorator that is used to decorate the services and handles common exceptions |  
-| /src/lib/errors                                       | Directory containing the types of errors handled by the Exception decorator  |  
-| /src/factories/graphqlServerFactory.ts                | Factory pattern used by the Lambda handler (movie-handler.ts) to create the Graphql Apollo Server instance |
-| /src/factories/lambdaHandlerFactory.ts                | Factory pattern used to create the Lambda handler |
-| /src/factories/loggerFactory.ts                       | Factory pattern used to create an instance of the Logger class |
-| /src/factories/rdsProviderFactory.ts                  | Factory pattern used to create an instance of the RdsProvider which manages the connection to the MySQL database |
-| /src/factories/secretsManagerProviderFactory.ts       | Factory pattern used to create an instance of the SecretsManagerProvider which manages the retrieval of the secrets key |
-| /src/initializers/awsInitialier.ts                    | AWS configuration initializer |
-| /src/providers                                        | Directory containing the RDS and SecretsManager providers which are responsible for managing the connection to the database and Secrets Manager key retrieval, respectively |
-| /src/logger.ts                                        | Logger class |
-| /src/services/movieService.ts                         | Business logic layer that retrieves the Movie data from the database.  Repositories were not used because TypeORM has the repository concept built in |
-| /src/services/secretsService.ts                       | Service that manages retrieval of the Secrets Manager key from the SecretsManagerProvider
-| /movie-handler.ts                                     | The entry point of the application as the Lambda handler that creates an instance of Apollo-Server and creates a Lambda handler |
-| /serverless.yml                                       | Serverless.com framework definition file that sets up the AWS services used | 
+|                                  Directory/File | Description                                                                                                                                                                                                      |  
+|------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|  
+|                                      /__tests__ | Directory containing the unit tests using the [Jest](https://jestjs.io/) framework                                                                                                                               |  
+|                                             /db | Directory containing the MySQL database Docker container definition and DDL scripts to create the schema and load sample data                                                                                    |  
+|                                     /src/config | Directory containing the application configuration related files                                                                                                                                                 |  
+|                                   /src/entities | Directory containing the Movie TypeORM entity that maps the Movie model to the MySQL database                                                                                                                    |  
+|                                    /src/graphql | Directory containing the graphql types (Movie), queries (i.e., movie and movies), and resolvers                                                                                                                  |  
+|                                        /src/ioc | Directory containing the Inversify IoC container definition and bindings                                                                                                                                         |  
+|                             /src/lib/decorators | Directory containing the Exception decorator that is used to decorate the services and handles common exceptions                                                                                                 |  
+|                                 /src/lib/errors | Directory containing the types of errors handled by the Exception decorator                                                                                                                                      |  
+|          /src/factories/graphqlServerFactory.ts | Factory pattern used by the Lambda handler (movie-handler.ts) to create the Graphql Apollo Server instance                                                                                                       |
+|          /src/factories/lambdaHandlerFactory.ts | Factory pattern used to create the Lambda handler                                                                                                                                                                |
+|                 /src/factories/loggerFactory.ts | Factory pattern used to create an instance of the Logger class                                                                                                                                                   |
+|            /src/factories/rdsProviderFactory.ts | Factory pattern used to create an instance of the RdsProvider which manages the connection to the MySQL database                                                                                                 |
+| /src/factories/secretsManagerProviderFactory.ts | Factory pattern used to create an instance of the SecretsManagerProvider which manages the retrieval of the secrets key                                                                                          |
+|              /src/initializers/awsInitialier.ts | AWS configuration initializer                                                                                                                                                                                    |
+|                                  /src/providers | Directory containing the Database, RDS and SecretsManager providers that use the Adapter pattern and are responsible for managing the connection to the database and Secrets Manager key retrieval, respectively |
+|                                  /src/logger.ts | Logger class                                                                                                                                                                                                     |
+|                   /src/services/movieService.ts | Business logic layer that retrieves the Movie data from the database.  Repositories were not used because TypeORM has the repository concept built in                                                            |
+|                 /src/services/secretsService.ts | Service that manages retrieval of the Secrets Manager key from the SecretsManagerProvider                                                                                                                        
+|                               /movie-handler.ts | The entry point of the application as the Lambda handler that creates an instance of Apollo-Server and creates a Lambda handler                                                                                  |
+|                                 /serverless.yml | Serverless.com framework definition file that sets up the AWS services used                                                                                                                                      | 
      
 ### Movie Service Schema
 
