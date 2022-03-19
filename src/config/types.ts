@@ -8,5 +8,6 @@ export const TYPE = {
   BaseService: Symbol('BaseService'),
   MovieService: Symbol('MovieService'),
   RdsGraphQlServerFactory: Symbol('RdsGraphQlServerFactory'),
-  Connection: Symbol('Connection')
+  Connection: Symbol('Connection'),
+  SecretsManagerClient: Symbol('SecretsManagerClient')
 };
