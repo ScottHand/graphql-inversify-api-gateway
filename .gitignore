@@ -6,8 +6,9 @@ jspm_packages
 **/.serverless
 
 #IDE's
-.idea/
-.vscode/
+**/.idea
+**/.vscode
+
 # Custom
 package-lock.json
 
