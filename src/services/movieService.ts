@@ -22,14 +22,12 @@ export class MovieService extends BaseService {
   async getAll(): Promise<Movie[]> {
     try {
       await this.checkConnection();
-      // const result = await this.connection.getRepository(Movie).find();
-      const result = getConnection()
+
+      return await getConnection()
         .getRepository(Movie)
         .createQueryBuilder('movie')
         .orderBy( { title: 'ASC'})
         .getMany();
-      this.logger.log(MovieService.name, this.getAll.name, `result: ${JSON.stringify(result)}`);
-      return result;
     } catch (error) {
       this.logger.error(MovieService.name, this.getAll.name, JSON.stringify(error));
       throw error;
@@ -48,16 +46,13 @@ export class MovieService extends BaseService {
       this.validateIfExist({id});
 
       await this.checkConnection();
-      this.logger.log(MovieService.name, this.getById.name, `id: ${id}`);
 
-      const result = await getConnection()
+      return await getConnection()
         .getRepository(Movie)
         .createQueryBuilder('movie')
         .select()
         .where('id = :id', { id })
         .getOne();
-      this.logger.log(MovieService.name, this.getById.name, `result`, result);
-      return result;
     } catch (error) {
       this.logger.error(MovieService.name, this.getById.name, JSON.stringify(error));
       throw error;
