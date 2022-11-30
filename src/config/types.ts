@@ -9,5 +9,8 @@ export const TYPE = {
   MovieService: Symbol('MovieService'),
   RdsGraphQlServerFactory: Symbol('RdsGraphQlServerFactory'),
   Connection: Symbol('Connection'),
-  SecretsManagerClient: Symbol('SecretsManagerClient')
+  SecretsManagerClient: Symbol('SecretsManagerClient'),
+  AppConfigProvider: Symbol('AppConfigProvider'),
+  AppConfigService: Symbol('AppConfigService'),
+  AppConfigParameters: Symbol('AppConfigParameters'),
 };

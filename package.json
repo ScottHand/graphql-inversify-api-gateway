@@ -35,6 +35,7 @@
     "typescript": "^4.0.5"
   },
   "dependencies": {
+    "apollo-datasource-rest": "^3.7.0",
     "apollo-server-lambda": "^2.19.0",
     "aws-lambda": "^1.0.6",
     "inversify": "^5.0.1",
