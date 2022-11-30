@@ -4,7 +4,7 @@ This repo includes a sample API Gateway with Lambda integration intended to demo
 
 In many cases, we see customers choose speed given it can take months to get new AWS services and open-source frameworks through a security review, architecture review board, etc. and ultimately approved.
 
-This API is an example of that where the following choices that were already approved by the customer's organization:
+This API is an example of where the following choices that were already approved by the customer's organization:
 
 - [Graphql Apollo Server](https://www.apollographql.com/docs/apollo-server/) an open-source GraphQL server used instead of AppSync
 - [Serverless framework](https://www.serverless.com/) instead of the AWS Serverless Application Model (SAM)
