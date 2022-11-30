@@ -1,6 +1,6 @@
 ### Overview
 
-This repo includes a sample API Gateway with Lambda integration intended to demonstrate a customer common use case we have observed in ProServe whereby the customer has a limited subset of AWS services and open-source frameworks/libraries approved within their organization.  This often results in teams having to make trade-offs between speed and desired architecture.
+This repo includes a sample API Gateway with Lambda integration intended to demonstrate a customer common use case we have observed whereby the customer has a limited subset of AWS services and open-source frameworks/libraries approved within their organization.  This often results in teams having to make trade-offs between speed and desired architecture.
 
 In many cases, we see customers choose speed given it can take months to get new AWS services and open-source frameworks through a security review, architecture review board, etc. and ultimately approved.
 
